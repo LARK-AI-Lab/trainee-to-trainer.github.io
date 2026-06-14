@@ -219,10 +219,23 @@ code {
 .tag-base  { color: var(--case-base-tag);  border: 1px solid rgba(180,83,9,.25);  }
 .tag-train { color: var(--case-train-tag); border: 1px solid rgba(4,120,87,.25); }
 
+/* "Tokens generated: N" line above the metric chips. Forced onto its
+   own row, slightly larger than the chips, with a thin top divider so
+   it visually separates from the descriptive paragraph above. */
+.case-tokens {
+    margin: 1.1rem 0 0;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(15, 23, 42, .12);
+    font-size: 1.02rem;
+    color: var(--fg);
+    letter-spacing: .01em;
+}
+.case-tokens strong { font-weight: 700; }
+
 .case-metrics {
     list-style: none;
     padding: 0;
-    margin: 1rem 0 0;
+    margin: 0.75rem 0 0;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
