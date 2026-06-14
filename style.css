@@ -177,6 +177,8 @@ code {
 }
 .framework-figure a {
     display: inline-block;
+    width: 100%;
+    max-width: 760px;          /* shrink so it doesn't fill the 1140px container */
     background: #ffffff;
     padding: 14px;
     border-radius: var(--radius);
