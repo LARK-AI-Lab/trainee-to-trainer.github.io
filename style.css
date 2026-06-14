@@ -1,0 +1,334 @@
+/* ============================================================
+   Project page – minimal modern static styling
+   No external fonts / frameworks. System font stack only.
+   ============================================================ */
+
+:root {
+    /* Brand */
+    --bg:           #ffffff;
+    --bg-soft:      #f8fafc;
+    --fg:           #1f2937;
+    --fg-muted:     #4b5563;
+    --accent:       #2563eb;
+    --accent-dark:  #1e40af;
+
+    /* Section background colors for the two case-study blocks */
+    --case-base-bg:    #fffbe6;   /* light yellow */
+    --case-base-tag:   #b45309;   /* amber-700, for the tag pill */
+    --case-train-bg:   #ecfdf5;   /* light green */
+    --case-train-tag:  #047857;   /* emerald-700 */
+
+    /* Layout */
+    --container-max:  1100px;
+    --container-narrow: 760px;
+    --radius:         12px;
+    --shadow-sm:      0 1px 2px rgba(15, 23, 42, .06),
+                      0 4px 14px rgba(15, 23, 42, .04);
+    --shadow-md:      0 4px 6px rgba(15, 23, 42, .07),
+                      0 12px 32px rgba(15, 23, 42, .08);
+}
+
+/* ---------- Reset / base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+    margin: 0;
+    color: var(--fg);
+    background: var(--bg);
+    font-family:
+        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+        Arial, "Noto Sans", sans-serif;
+    line-height: 1.6;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 {
+    color: var(--fg);
+    line-height: 1.25;
+    margin: 0 0 .5em;
+    letter-spacing: -0.01em;
+}
+h1 { font-size: clamp(1.9rem, 3.4vw, 2.7rem); font-weight: 700; }
+h2 { font-size: clamp(1.4rem, 2.2vw, 1.85rem); font-weight: 650; }
+h3 { font-size: 1.2rem; font-weight: 650; }
+p  { margin: 0 0 1em; color: var(--fg); }
+a  { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-dark); text-decoration: underline; }
+code {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.9em;
+    background: #eef2f7;
+    padding: .1em .35em;
+    border-radius: 4px;
+}
+
+.container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 24px;
+}
+.container.narrow { max-width: var(--container-narrow); }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+    background:
+        radial-gradient(80% 60% at 50% 0%, rgba(37, 99, 235, .08), transparent 70%),
+        linear-gradient(180deg, #f7faff 0%, #ffffff 100%);
+    padding: 72px 0 56px;
+    border-bottom: 1px solid #eef2f7;
+    text-align: center;
+}
+.hero .title {
+    margin-bottom: .55rem;
+}
+.hero .subtitle {
+    font-size: 1.1rem;
+    color: var(--fg-muted);
+    max-width: 740px;
+    margin: 0 auto 1.4rem;
+}
+.hero .authors {
+    font-size: 1.02rem;
+    margin: 1.2rem 0 .3rem;
+    color: var(--fg);
+}
+.hero .author { font-weight: 600; }
+.hero .affil {
+    color: var(--fg-muted);
+    font-size: .92rem;
+    margin: 0 0 1.5rem;
+}
+.hero .dot { margin: 0 .55em; color: #94a3b8; }
+
+/* ---------- Link pills ---------- */
+.links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 1.6rem;
+}
+.link-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: #111827;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.96rem;
+    border: 1px solid transparent;
+    text-decoration: none !important;
+    box-shadow: var(--shadow-sm);
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.link-pill:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    color: #ffffff;
+}
+.link-pill .icon {
+    width: 20px; height: 20px;
+}
+.link-pill.hf {
+    background: linear-gradient(135deg, #ffcd1c 0%, #ff9d00 100%);
+    color: #111827;
+}
+.link-pill.hf:hover {
+    color: #111827;
+    background: linear-gradient(135deg, #ffd543 0%, #ffb22e 100%);
+}
+.link-pill .hf-emoji {
+    font-size: 1.25rem;
+    line-height: 1;
+}
+
+/* ============================================================
+   Section scaffolding
+   ============================================================ */
+.section { padding: 72px 0; }
+.section-light { background: var(--bg-soft); }
+.section-heading { text-align: center; margin-bottom: .5rem; }
+.section-lead {
+    text-align: center;
+    max-width: 740px;
+    margin: 0 auto 2.5rem;
+    color: var(--fg-muted);
+}
+
+#abstract h2,
+#abstract p {
+    /* abstract is narrower and reads like a paragraph */
+}
+#abstract p {
+    font-size: 1.06rem;
+    color: var(--fg);
+}
+
+/* ============================================================
+   Case study blocks (two stacked panels with colored backgrounds)
+   ============================================================ */
+.case-block {
+    padding: 56px 0;
+    border-top: 1px solid rgba(15, 23, 42, .06);
+    border-bottom: 1px solid rgba(15, 23, 42, .06);
+}
+.case-block + .case-block { border-top: none; }
+.case-base  { background: var(--case-base-bg);  }
+.case-train { background: var(--case-train-bg); }
+
+.case-grid {
+    display: grid;
+    grid-template-columns: minmax(280px, 1fr) minmax(280px, 1.15fr);
+    gap: 40px;
+    align-items: center;
+}
+@media (max-width: 820px) {
+    .case-grid { grid-template-columns: 1fr; }
+}
+
+.case-text { padding: 8px 0; }
+.case-text h3 { margin-top: .25rem; }
+.case-text p  { color: var(--fg); }
+
+.case-tag {
+    display: inline-block;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .65);
+}
+.tag-base  { color: var(--case-base-tag);  border: 1px solid rgba(180,83,9,.25);  }
+.tag-train { color: var(--case-train-tag); border: 1px solid rgba(4,120,87,.25); }
+
+.case-metrics {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.case-metrics li {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    padding: 6px 12px;
+    background: rgba(255, 255, 255, .8);
+    border: 1px solid rgba(15, 23, 42, .08);
+    border-radius: 8px;
+    font-size: .92rem;
+}
+.case-metrics li span { color: var(--fg-muted); }
+.case-metrics li b { color: var(--fg); }
+
+.case-figure {
+    margin: 0;
+    background: #ffffff;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    padding: 8px;
+}
+.case-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: calc(var(--radius) - 4px);
+    image-rendering: pixelated;       /* keeps the elf/ice sprites crisp */
+    background: #f1f5f9;
+}
+.case-figure figcaption {
+    margin: .55rem .25rem .15rem;
+    font-size: .85rem;
+    color: var(--fg-muted);
+    text-align: center;
+}
+
+/* ============================================================
+   Results section
+   ============================================================ */
+.figure-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 2rem;
+}
+@media (max-width: 760px) {
+    .figure-grid { grid-template-columns: 1fr; }
+}
+.figure-grid figure {
+    margin: 0;
+    background: #fff;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    padding: 12px;
+}
+.figure-grid figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+.figure-grid figcaption {
+    margin-top: .55rem;
+    font-size: .9rem;
+    color: var(--fg-muted);
+    text-align: center;
+}
+
+.table-wrap { overflow-x: auto; }
+.results-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    font-size: .96rem;
+}
+.results-table th,
+.results-table td {
+    text-align: center;
+    padding: 12px 14px;
+    border-bottom: 1px solid #eef2f7;
+}
+.results-table th {
+    background: #f1f5f9;
+    color: var(--fg);
+    font-weight: 600;
+    letter-spacing: .01em;
+}
+.results-table tr:last-child td { border-bottom: none; }
+.results-table tr.highlight td { background: #eff6ff; }
+.results-table td:first-child,
+.results-table th:first-child {
+    text-align: left;
+    padding-left: 22px;
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.footer {
+    padding: 28px 0 36px;
+    text-align: center;
+    color: var(--fg-muted);
+    font-size: .9rem;
+    border-top: 1px solid #eef2f7;
+    background: #ffffff;
+}
+
+/* ============================================================
+   Reduced motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .link-pill:hover { transform: none; }
+}

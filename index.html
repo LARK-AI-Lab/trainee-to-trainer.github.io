@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- TODO: edit the page title -->
+    <title>Self-Evolving MAPF Curriculum &mdash; Project Page</title>
+    <meta name="description"
+        content="LLM-driven self-training for multi-agent path finding: dynamic curriculum from
+                 failure analysis, GRPO-based reinforcement learning, and emergent planning skills." />
+
+    <!-- Open Graph (optional, for nicer link previews) -->
+    <meta property="og:title" content="Self-Evolving MAPF Curriculum" />
+    <meta property="og:description"
+        content="LLM-driven self-training for multi-agent path finding." />
+    <!-- TODO: replace with a hosted preview image when you have one -->
+    <meta property="og:image" content="assets/train.gif" />
+    <meta property="og:type" content="website" />
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ============================================================
+     HERO: title + project links (GitHub + HuggingFace)
+     ============================================================ -->
+<header class="hero">
+    <div class="container">
+        <h1 class="title">
+            <!-- TODO: edit project title -->
+            Self-Evolving Curriculum for Multi-Agent Path Finding
+        </h1>
+
+        <p class="subtitle">
+            <!-- TODO: edit one-line tagline -->
+            An LLM analyses its own failures and rewrites the next-round training
+            distribution — yielding a curriculum that emerges purely from RL feedback.
+        </p>
+
+        <!-- TODO: edit author names + affiliations (or remove block) -->
+        <p class="authors">
+            <span class="author">Author One</span>
+            <span class="dot">&middot;</span>
+            <span class="author">Author Two</span>
+            <span class="dot">&middot;</span>
+            <span class="author">Author Three</span>
+        </p>
+        <p class="affil">
+            <span>Affiliation A</span>
+            <span class="dot">&middot;</span>
+            <span>Affiliation B</span>
+        </p>
+
+        <!-- Link badges: GitHub + Hugging Face. Just edit the href to point at
+             your real URLs; everything else is purely visual. -->
+        <nav class="links" aria-label="Project links">
+            <!-- TODO: replace GitHub URL -->
+            <a class="link-pill"
+               href="https://github.com/YOUR_ORG/YOUR_REPO"
+               target="_blank" rel="noopener noreferrer">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="currentColor"
+                        d="M12 .5C5.73.5.99 5.24.99 11.5c0 4.86 3.15 8.99 7.52 10.45.55.1.75-.24.75-.53 0-.26-.01-1.13-.02-2.05-3.06.67-3.71-1.3-3.71-1.3-.5-1.27-1.22-1.61-1.22-1.61-1-.69.08-.67.08-.67 1.1.08 1.69 1.13 1.69 1.13.98 1.69 2.58 1.2 3.21.92.1-.72.39-1.2.7-1.48-2.45-.28-5.02-1.22-5.02-5.45 0-1.21.43-2.2 1.13-2.97-.11-.28-.49-1.4.11-2.92 0 0 .93-.3 3.04 1.13a10.6 10.6 0 0 1 5.54 0c2.11-1.43 3.04-1.13 3.04-1.13.6 1.52.22 2.64.11 2.92.7.77 1.13 1.76 1.13 2.97 0 4.25-2.58 5.17-5.04 5.44.4.34.75 1.01.75 2.05 0 1.48-.01 2.67-.01 3.03 0 .29.2.64.76.53 4.36-1.47 7.51-5.59 7.51-10.45C23.01 5.24 18.27.5 12 .5Z"/>
+                </svg>
+                <span>Code</span>
+            </a>
+
+            <!-- TODO: replace HuggingFace URL -->
+            <a class="link-pill hf"
+               href="https://huggingface.co/YOUR_ORG/YOUR_MODEL"
+               target="_blank" rel="noopener noreferrer">
+                <span class="hf-emoji" aria-hidden="true">&#129303;</span>
+                <span>Model</span>
+            </a>
+
+            <!-- (Optional) extra links — comment out or remove if not used -->
+            <!--
+            <a class="link-pill" href="https://arxiv.org/abs/XXXX.XXXXX"
+               target="_blank" rel="noopener noreferrer">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="currentColor"
+                        d="M6 2h9l5 5v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1Zm8 1v5h5l-5-5Z"/>
+                </svg>
+                <span>Paper</span>
+            </a>
+            -->
+        </nav>
+    </div>
+</header>
+
+<main>
+
+<!-- ============================================================
+     SECTION 1: Abstract
+     ============================================================ -->
+<section id="abstract" class="section section-light">
+    <div class="container narrow">
+        <h2>Abstract</h2>
+        <p>
+            <!-- TODO: edit abstract -->
+            We study whether a large language model can author its own training
+            curriculum for multi-agent path finding (MAPF). After each round of
+            GRPO-based reinforcement learning, an analyst LLM is presented with
+            the per-map-size failure breakdown and re-weights the next-round
+            sampling distribution by editing a single YAML config. With a fixed
+            per-round sample budget of 4&thinsp;000 trajectories, the model
+            steadily allocates more capacity to the failure modes it cannot yet
+            solve, and the resulting policy achieves substantially higher
+            <em>valid</em> and <em>optimal</em> rates than uniform-curriculum
+            baselines on held-out 3&ndash;10&times;10 boards.
+        </p>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 2: Case Study — two GIF blocks stacked vertically
+                Top: base (light yellow)   Bottom: trained (light green)
+     ============================================================ -->
+<section id="case-study" class="section">
+    <div class="container">
+        <h2 class="section-heading">Case Study</h2>
+        <p class="section-lead">
+            <!-- TODO: edit lead paragraph -->
+            A 3&times;3 board, two agents. Both models receive the same prompt;
+            we visualise the executed plan token-by-token. The base model
+            invents an illegal trajectory; the self-trained model recovers the
+            optimal makespan-2 solution.
+        </p>
+    </div>
+
+    <!-- BASE block: light yellow background -->
+    <div class="case-block case-base">
+        <div class="container case-grid">
+            <div class="case-text">
+                <div class="case-tag tag-base">Before training</div>
+                <h3>Base Qwen3-4B</h3>
+                <p>
+                    <!-- TODO: edit description -->
+                    The base model parses the map and proposes an action for
+                    Agent&nbsp;0 but the trajectory for Agent&nbsp;1 is cut off
+                    before it reaches its goal, leaving an illegal/incomplete
+                    plan. Of the five failure categories tracked by the
+                    evaluator, this run trips
+                    <code>has_illegal_moves=True</code> and
+                    <code>all_goals_reached=False</code>.
+                </p>
+                <!-- Optional metric badges -->
+                <ul class="case-metrics">
+                    <li><span>Valid</span><b>&#x2717;</b></li>
+                    <li><span>Optimal</span><b>&#x2717;</b></li>
+                    <li><span>Cost (gt=3)</span><b>1</b></li>
+                </ul>
+            </div>
+            <figure class="case-figure">
+                <!-- TODO: drop your base GIF at docs/assets/base.gif -->
+                <img src="assets/base.gif"
+                     alt="Base Qwen3-4B executing its plan on a 3x3 MAPF case"
+                     loading="lazy" />
+                <figcaption>Base model rollout (sample 2agents_3x3_0236).</figcaption>
+            </figure>
+        </div>
+    </div>
+
+    <!-- TRAINED block: light green background -->
+    <div class="case-block case-train">
+        <div class="container case-grid">
+            <div class="case-text">
+                <div class="case-tag tag-train">After self-training</div>
+                <h3>Self-Trained Qwen3-4B</h3>
+                <p>
+                    <!-- TODO: edit description -->
+                    After three rounds of LLM-curated curriculum, the same
+                    model finds the optimal plan in two timesteps:
+                    Agent&nbsp;0 moves <em>RIGHT</em>, Agent&nbsp;1 moves
+                    <em>UP</em> then <em>LEFT</em>, with no collisions and no
+                    illegal jumps.
+                </p>
+                <ul class="case-metrics">
+                    <li><span>Valid</span><b>&#x2713;</b></li>
+                    <li><span>Optimal</span><b>&#x2713;</b></li>
+                    <li><span>Cost (gt=3)</span><b>3</b></li>
+                </ul>
+            </div>
+            <figure class="case-figure">
+                <!-- TODO: drop your trained GIF at docs/assets/train.gif -->
+                <img src="assets/train.gif"
+                     alt="Self-trained Qwen3-4B executing its plan on the same 3x3 MAPF case"
+                     loading="lazy" />
+                <figcaption>Trained model rollout (same sample).</figcaption>
+            </figure>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 3: Experimental Results
+     ============================================================ -->
+<section id="results" class="section section-light">
+    <div class="container">
+        <h2 class="section-heading">Experimental Results</h2>
+        <p class="section-lead">
+            <!-- TODO: edit lead -->
+            Per-map-size valid&nbsp;% and optimal&nbsp;% on the held-out
+            benchmark, compared against uniform-curriculum and base-model
+            baselines.
+        </p>
+
+        <!-- A figure / chart row. Replace with your own PNGs in docs/assets/. -->
+        <div class="figure-grid">
+            <figure>
+                <!-- TODO: replace with your chart -->
+                <img src="assets/results_valid.png"
+                     alt="Valid rate per map size across methods"
+                     loading="lazy" />
+                <figcaption>Valid&nbsp;% by map size (3 agents).</figcaption>
+            </figure>
+            <figure>
+                <img src="assets/results_optimal.png"
+                     alt="Optimal rate per map size across methods"
+                     loading="lazy" />
+                <figcaption>Optimal&nbsp;% by map size (3 agents).</figcaption>
+            </figure>
+        </div>
+
+        <!-- Optional summary table. Edit numbers / methods inline. -->
+        <div class="table-wrap">
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Valid&nbsp;%</th>
+                        <th>Optimal&nbsp;%</th>
+                        <th>Parse&nbsp;%</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- TODO: replace rows with your actual numbers -->
+                    <tr>
+                        <td>Base Qwen3-4B</td>
+                        <td>&mdash;</td><td>&mdash;</td><td>&mdash;</td>
+                    </tr>
+                    <tr>
+                        <td>Uniform curriculum</td>
+                        <td>&mdash;</td><td>&mdash;</td><td>&mdash;</td>
+                    </tr>
+                    <tr class="highlight">
+                        <td><b>Self-evolved curriculum (ours)</b></td>
+                        <td>&mdash;</td><td>&mdash;</td><td>&mdash;</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <p>
+            <!-- TODO: edit footer -->
+            &copy; <span id="year"></span> Project Authors.
+            Built with vanilla HTML/CSS on GitHub Pages.
+        </p>
+    </div>
+</footer>
+
+<script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
