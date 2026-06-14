@@ -1,5 +1,5 @@
 /* ============================================================
-   Project page – minimal modern static styling
+   Trainee-to-Trainer project page — vanilla CSS
    No external fonts / frameworks. System font stack only.
    ============================================================ */
 
@@ -12,20 +12,27 @@
     --accent:       #2563eb;
     --accent-dark:  #1e40af;
 
-    /* Section background colors for the two case-study blocks */
+    /* Case-study panels */
     --case-base-bg:    #fffbe6;   /* light yellow */
-    --case-base-tag:   #b45309;   /* amber-700, for the tag pill */
+    --case-base-tag:   #b45309;
     --case-train-bg:   #ecfdf5;   /* light green */
-    --case-train-tag:  #047857;   /* emerald-700 */
+    --case-train-tag:  #047857;
+
+    /* Tables */
+    --tbl-stripe:    #f8fafc;
+    --tbl-border:    #e5e7eb;
+    --tbl-head-bg:   #f1f5f9;
+    --tbl-ours-bg:   #eef6ff;
+    --tbl-sum-bg:    #fffaf0;
 
     /* Layout */
-    --container-max:  1100px;
+    --container-max:    1140px;
     --container-narrow: 760px;
-    --radius:         12px;
-    --shadow-sm:      0 1px 2px rgba(15, 23, 42, .06),
-                      0 4px 14px rgba(15, 23, 42, .04);
-    --shadow-md:      0 4px 6px rgba(15, 23, 42, .07),
-                      0 12px 32px rgba(15, 23, 42, .08);
+    --radius:           12px;
+    --shadow-sm:        0 1px 2px rgba(15, 23, 42, .06),
+                        0 4px 14px rgba(15, 23, 42, .04);
+    --shadow-md:        0 4px 6px rgba(15, 23, 42, .07),
+                        0 12px 32px rgba(15, 23, 42, .08);
 }
 
 /* ---------- Reset / base ---------- */
@@ -48,7 +55,7 @@ h1, h2, h3 {
     margin: 0 0 .5em;
     letter-spacing: -0.01em;
 }
-h1 { font-size: clamp(1.9rem, 3.4vw, 2.7rem); font-weight: 700; }
+h1 { font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 700; }
 h2 { font-size: clamp(1.4rem, 2.2vw, 1.85rem); font-weight: 650; }
 h3 { font-size: 1.2rem; font-weight: 650; }
 p  { margin: 0 0 1em; color: var(--fg); }
@@ -80,27 +87,41 @@ code {
     border-bottom: 1px solid #eef2f7;
     text-align: center;
 }
-.hero .title {
-    margin-bottom: .55rem;
-}
+.hero .title { margin-bottom: .55rem; }
 .hero .subtitle {
     font-size: 1.1rem;
     color: var(--fg-muted);
-    max-width: 740px;
+    max-width: 760px;
     margin: 0 auto 1.4rem;
 }
 .hero .authors {
     font-size: 1.02rem;
-    margin: 1.2rem 0 .3rem;
+    margin: 1.2rem 0 .35rem;
     color: var(--fg);
 }
 .hero .author { font-weight: 600; }
 .hero .affil {
     color: var(--fg-muted);
     font-size: .92rem;
-    margin: 0 0 1.5rem;
+    margin: 0 0 .4rem;
 }
+.hero .affil.mark-key { font-size: .85rem; margin-bottom: 1.5rem; }
 .hero .dot { margin: 0 .55em; color: #94a3b8; }
+.aff {
+    font-size: .72em;
+    vertical-align: super;
+    line-height: 0;
+    color: var(--accent);
+    font-weight: 600;
+    margin-left: 2px;
+}
+.mark {
+    font-size: .72em;
+    vertical-align: super;
+    line-height: 0;
+    color: #b91c1c;
+    margin-left: 2px;
+}
 
 /* ---------- Link pills ---------- */
 .links {
@@ -114,7 +135,7 @@ code {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 18px;
+    padding: 10px 20px;
     border-radius: 999px;
     background: #111827;
     color: #ffffff;
@@ -130,9 +151,7 @@ code {
     box-shadow: var(--shadow-md);
     color: #ffffff;
 }
-.link-pill .icon {
-    width: 20px; height: 20px;
-}
+.link-pill .icon { width: 20px; height: 20px; }
 .link-pill.hf {
     background: linear-gradient(135deg, #ffcd1c 0%, #ff9d00 100%);
     color: #111827;
@@ -141,10 +160,7 @@ code {
     color: #111827;
     background: linear-gradient(135deg, #ffd543 0%, #ffb22e 100%);
 }
-.link-pill .hf-emoji {
-    font-size: 1.25rem;
-    line-height: 1;
-}
+.link-pill .hf-emoji { font-size: 1.25rem; line-height: 1; }
 
 /* ============================================================
    Section scaffolding
@@ -154,22 +170,19 @@ code {
 .section-heading { text-align: center; margin-bottom: .5rem; }
 .section-lead {
     text-align: center;
-    max-width: 740px;
+    max-width: 820px;
     margin: 0 auto 2.5rem;
     color: var(--fg-muted);
 }
 
-#abstract h2,
 #abstract p {
-    /* abstract is narrower and reads like a paragraph */
-}
-#abstract p {
-    font-size: 1.06rem;
+    font-size: 1.05rem;
     color: var(--fg);
+    text-align: justify;
 }
 
 /* ============================================================
-   Case study blocks (two stacked panels with colored backgrounds)
+   Case study blocks
    ============================================================ */
 .case-block {
     padding: 56px 0;
@@ -192,7 +205,6 @@ code {
 
 .case-text { padding: 8px 0; }
 .case-text h3 { margin-top: .25rem; }
-.case-text p  { color: var(--fg); }
 
 .case-tag {
     display: inline-block;
@@ -241,7 +253,7 @@ code {
     width: 100%;
     height: auto;
     border-radius: calc(var(--radius) - 4px);
-    image-rendering: pixelated;       /* keeps the elf/ice sprites crisp */
+    image-rendering: pixelated;
     background: #f1f5f9;
 }
 .case-figure figcaption {
@@ -252,65 +264,101 @@ code {
 }
 
 /* ============================================================
-   Results section
+   Results tables — wide multi-column main results
    ============================================================ */
-.figure-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    margin-bottom: 2rem;
-}
-@media (max-width: 760px) {
-    .figure-grid { grid-template-columns: 1fr; }
-}
-.figure-grid figure {
-    margin: 0;
-    background: #fff;
+.result-table-wrap {
+    /* Each table block gets its own row + horizontal scroll on narrow viewports. */
+    background: #ffffff;
     border-radius: var(--radius);
     box-shadow: var(--shadow-sm);
-    padding: 12px;
+    padding: 16px 18px 18px;
+    margin-bottom: 28px;
+    overflow-x: auto;
 }
-.figure-grid figure img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-}
-.figure-grid figcaption {
-    margin-top: .55rem;
-    font-size: .9rem;
-    color: var(--fg-muted);
-    text-align: center;
-}
+.result-table-wrap:last-child { margin-bottom: 0; }
 
-.table-wrap { overflow-x: auto; }
 .results-table {
-    width: 100%;
     border-collapse: collapse;
-    background: #fff;
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: var(--shadow-sm);
-    font-size: .96rem;
+    border-spacing: 0;
+    width: 100%;
+    min-width: 720px;       /* forces horizontal scroll on phones */
+    font-size: .92rem;
+    color: var(--fg);
 }
+.results-table caption {
+    caption-side: top;
+    text-align: left;
+    padding: 4px 4px 12px;
+    color: var(--fg-muted);
+    font-size: .95rem;
+}
+.results-table caption strong { color: var(--fg); }
+
 .results-table th,
 .results-table td {
     text-align: center;
-    padding: 12px 14px;
-    border-bottom: 1px solid #eef2f7;
+    padding: 7px 8px;
+    border-bottom: 1px solid var(--tbl-border);
+    white-space: nowrap;
 }
-.results-table th {
-    background: #f1f5f9;
-    color: var(--fg);
+
+/* Header */
+.results-table thead th {
+    background: var(--tbl-head-bg);
     font-weight: 600;
-    letter-spacing: .01em;
+    border-bottom: 1px solid #cbd5e1;
+    border-top: 1px solid var(--tbl-border);
 }
-.results-table tr:last-child td { border-bottom: none; }
-.results-table tr.highlight td { background: #eff6ff; }
-.results-table td:first-child,
-.results-table th:first-child {
+.results-table thead tr:first-child th {
+    border-top: 2px solid #94a3b8;     /* booktabs-style toprule */
+}
+.results-table thead tr:last-child th {
+    border-bottom: 1.5px solid #94a3b8;
+    font-weight: 500;
+    color: var(--fg-muted);
+}
+.results-table th.th-model {
     text-align: left;
-    padding-left: 22px;
+    padding-left: 14px;
+    background: var(--tbl-head-bg);
+    border-right: 1px solid var(--tbl-border);
+}
+.results-table th.th-sum,
+.results-table td.td-sum {
+    background: var(--tbl-sum-bg);
+    border-left: 1.5px solid #cbd5e1;
+}
+
+/* Body cells */
+.results-table td.model {
+    text-align: left;
+    padding-left: 14px;
+    border-right: 1px solid var(--tbl-border);
+    font-weight: 500;
+    background: #fdfdfd;
+}
+.results-table tbody tr:nth-child(odd) td:not(.model):not(.td-sum) {
+    background: var(--tbl-stripe);
+}
+
+/* Group separator between proprietary baselines and Qwen3-4B variants
+   — replicates LaTeX \midrule */
+.results-table tr.row-group-end td {
+    border-bottom: 1.5px solid #94a3b8;
+}
+
+/* Highlight the "Ours" row */
+.results-table tr.row-ours td {
+    background: var(--tbl-ours-bg);
+}
+.results-table tr.row-ours td.model { background: #dbeafe; color: #1e3a8a; }
+.results-table tr.row-ours td.td-sum {
+    background: #d6e8ff;
+}
+
+/* Bottom rule (booktabs) */
+.results-table tbody tr:last-child td {
+    border-bottom: 2px solid #94a3b8;
 }
 
 /* ============================================================

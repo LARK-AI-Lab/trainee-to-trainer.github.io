@@ -3,17 +3,17 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- TODO: edit the page title -->
-    <title>Self-Evolving MAPF Curriculum &mdash; Project Page</title>
+    <title>Trainee-to-Trainer &mdash; LLM-as-Environment-Engineer for RL</title>
     <meta name="description"
-        content="LLM-driven self-training for multi-agent path finding: dynamic curriculum from
-                 failure analysis, GRPO-based reinforcement learning, and emergent planning skills." />
+        content="The current RL policy analyses its own failure trajectories and
+                 redesigns the next-stage training environment configuration.
+                 Project page for Chen et al., 2026." />
 
-    <!-- Open Graph (optional, for nicer link previews) -->
-    <meta property="og:title" content="Self-Evolving MAPF Curriculum" />
+    <!-- Open Graph (link previews) -->
+    <meta property="og:title" content="Trainee-to-Trainer: LLM-as-Environment-Engineer for RL" />
     <meta property="og:description"
-        content="LLM-driven self-training for multi-agent path finding." />
-    <!-- TODO: replace with a hosted preview image when you have one -->
+        content="The current RL policy analyses its own failures and redesigns
+                 the next-stage training environment." />
     <meta property="og:image" content="assets/train.gif" />
     <meta property="og:type" content="website" />
 
@@ -22,41 +22,46 @@
 <body>
 
 <!-- ============================================================
-     HERO: title + project links (GitHub + HuggingFace)
+     HERO: title + authors + links
      ============================================================ -->
 <header class="hero">
     <div class="container">
-        <h1 class="title">
-            <!-- TODO: edit project title -->
-            Self-Evolving Curriculum for Multi-Agent Path Finding
-        </h1>
-
+        <h1 class="title">Trainee-to-Trainer</h1>
         <p class="subtitle">
-            <!-- TODO: edit one-line tagline -->
-            An LLM analyses its own failures and rewrites the next-round training
-            distribution — yielding a curriculum that emerges purely from RL feedback.
+            <em>LLM-as-Environment-Engineer:</em> the current RL policy
+            analyses its own failure trajectories and proposes the next-stage
+            training environment configuration.
         </p>
 
-        <!-- TODO: edit author names + affiliations (or remove block) -->
         <p class="authors">
-            <span class="author">Author One</span>
+            <span class="author">
+                Chao Chen<sup class="aff">1</sup><sup class="mark">&dagger;</sup>
+            </span>
             <span class="dot">&middot;</span>
-            <span class="author">Author Two</span>
+            <span class="author">Chengzu Li<sup class="aff">2</sup></span>
             <span class="dot">&middot;</span>
-            <span class="author">Author Three</span>
+            <span class="author">Zhiwei Li<sup class="aff">1</sup></span>
+            <span class="dot">&middot;</span>
+            <span class="author">Yinhong Liu<sup class="aff">2</sup></span>
+            <span class="dot">&middot;</span>
+            <span class="author">
+                Zhijiang Guo<sup class="aff">1</sup><sup class="mark">&#9993;</sup>
+            </span>
         </p>
         <p class="affil">
-            <span>Affiliation A</span>
+            <span><sup class="aff">1</sup> HKUST (Guangzhou)</span>
             <span class="dot">&middot;</span>
-            <span>Affiliation B</span>
+            <span><sup class="aff">2</sup> University of Cambridge</span>
+        </p>
+        <p class="affil mark-key">
+            <sup class="mark">&dagger;</sup> First author
+            <span class="dot">&middot;</span>
+            <sup class="mark">&#9993;</sup> Corresponding author
         </p>
 
-        <!-- Link badges: GitHub + Hugging Face. Just edit the href to point at
-             your real URLs; everything else is purely visual. -->
         <nav class="links" aria-label="Project links">
-            <!-- TODO: replace GitHub URL -->
             <a class="link-pill"
-               href="https://github.com/YOUR_ORG/YOUR_REPO"
+               href="https://github.com/LARK-AI-Lab/Trainee-to-Trainer"
                target="_blank" rel="noopener noreferrer">
                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
                     <path fill="currentColor"
@@ -65,25 +70,12 @@
                 <span>Code</span>
             </a>
 
-            <!-- TODO: replace HuggingFace URL -->
             <a class="link-pill hf"
-               href="https://huggingface.co/YOUR_ORG/YOUR_MODEL"
+               href="https://huggingface.co/LARK-Lab/Trainee2Trainer"
                target="_blank" rel="noopener noreferrer">
                 <span class="hf-emoji" aria-hidden="true">&#129303;</span>
                 <span>Model</span>
             </a>
-
-            <!-- (Optional) extra links — comment out or remove if not used -->
-            <!--
-            <a class="link-pill" href="https://arxiv.org/abs/XXXX.XXXXX"
-               target="_blank" rel="noopener noreferrer">
-                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                    <path fill="currentColor"
-                        d="M6 2h9l5 5v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1Zm8 1v5h5l-5-5Z"/>
-                </svg>
-                <span>Paper</span>
-            </a>
-            -->
         </nav>
     </div>
 </header>
@@ -97,17 +89,36 @@
     <div class="container narrow">
         <h2>Abstract</h2>
         <p>
-            <!-- TODO: edit abstract -->
-            We study whether a large language model can author its own training
-            curriculum for multi-agent path finding (MAPF). After each round of
-            GRPO-based reinforcement learning, an analyst LLM is presented with
-            the per-map-size failure breakdown and re-weights the next-round
-            sampling distribution by editing a single YAML config. With a fixed
-            per-round sample budget of 4&thinsp;000 trajectories, the model
-            steadily allocates more capacity to the failure modes it cannot yet
-            solve, and the resulting policy achieves substantially higher
-            <em>valid</em> and <em>optimal</em> rates than uniform-curriculum
-            baselines on held-out 3&ndash;10&times;10 boards.
+            Reinforcement learning pipelines for Large Language Model (LLM)
+            training often rely on manually redesigned environments between
+            stages, requiring practitioners to heuristically infer which
+            configuration will best improve the current policy. To automate
+            this process, we propose the
+            <strong>LLM-as-Environment-Engineer</strong> framework in which
+            the current policy model analyzes failure trajectories together
+            with contextual information and proposes modifications to the
+            next-stage training environment configuration.
+        </p>
+        <p>
+            We also introduce <strong>MAPF-FrozenLake</strong>, a controllable
+            testbed whose generator exposes multi-dimensional environment
+            configurations, making it suitable for studying and benchmarking
+            environment redesign. On this testbed, we condition the
+            environment engineer on structured summaries of policy behavior,
+            failure cases, and environment statistics, from which it produces
+            the configuration for the next training stage.
+        </p>
+        <p>
+            With Qwen3-4B as the backbone, our framework achieves the
+            strongest aggregate performance on our benchmarks, outperforming
+            larger proprietary LLMs (e.g., GPT, Gemini) and fixed-environment
+            training baselines. We further analyze which forms of context are
+            most effective, finding that successful environment updates rely
+            on failure evidence and preserve configurations that already
+            work. Interestingly, the current RL checkpoint serves as a better
+            environment engineer than the original base model, suggesting
+            that policy learning improves the model's ability to diagnose its
+            remaining weaknesses.
         </p>
     </div>
 </section>
@@ -121,11 +132,10 @@
     <div class="container">
         <h2 class="section-heading">Case Study</h2>
         <p class="section-lead">
-            <!-- TODO: edit lead paragraph -->
-            A 3&times;3 board, two agents. Both models receive the same prompt;
-            we visualise the executed plan token-by-token. The base model
-            invents an illegal trajectory; the self-trained model recovers the
-            optimal makespan-2 solution.
+            A 3&times;3 board with two agents. Both checkpoints receive the
+            same prompt; we visualise the executed plan token-by-token. The
+            base model emits an illegal/incomplete trajectory; the trained
+            policy recovers the optimal makespan-2 solution.
         </p>
     </div>
 
@@ -136,24 +146,20 @@
                 <div class="case-tag tag-base">Before training</div>
                 <h3>Base Qwen3-4B</h3>
                 <p>
-                    <!-- TODO: edit description -->
                     The base model parses the map and proposes an action for
-                    Agent&nbsp;0 but the trajectory for Agent&nbsp;1 is cut off
-                    before it reaches its goal, leaving an illegal/incomplete
-                    plan. Of the five failure categories tracked by the
-                    evaluator, this run trips
-                    <code>has_illegal_moves=True</code> and
-                    <code>all_goals_reached=False</code>.
+                    Agent&nbsp;0 but the trajectory for Agent&nbsp;1 is cut
+                    off before it reaches its goal, leaving an
+                    illegal/incomplete plan. The evaluator flags
+                    <code>has_illegal_moves</code> = true and
+                    <code>all_goals_reached</code> = false.
                 </p>
-                <!-- Optional metric badges -->
                 <ul class="case-metrics">
                     <li><span>Valid</span><b>&#x2717;</b></li>
                     <li><span>Optimal</span><b>&#x2717;</b></li>
-                    <li><span>Cost (gt=3)</span><b>1</b></li>
+                    <li><span>Cost (gt&nbsp;=&nbsp;3)</span><b>1</b></li>
                 </ul>
             </div>
             <figure class="case-figure">
-                <!-- TODO: drop your base GIF at docs/assets/base.gif -->
                 <img src="assets/base.gif"
                      alt="Base Qwen3-4B executing its plan on a 3x3 MAPF case"
                      loading="lazy" />
@@ -166,26 +172,24 @@
     <div class="case-block case-train">
         <div class="container case-grid">
             <div class="case-text">
-                <div class="case-tag tag-train">After self-training</div>
-                <h3>Self-Trained Qwen3-4B</h3>
+                <div class="case-tag tag-train">After self-evolved training</div>
+                <h3>Trainee-to-Trainer (ours)</h3>
                 <p>
-                    <!-- TODO: edit description -->
-                    After three rounds of LLM-curated curriculum, the same
+                    After three rounds of LLM-engineered curriculum, the same
                     model finds the optimal plan in two timesteps:
-                    Agent&nbsp;0 moves <em>RIGHT</em>, Agent&nbsp;1 moves
+                    Agent&nbsp;0 moves <em>RIGHT</em>; Agent&nbsp;1 moves
                     <em>UP</em> then <em>LEFT</em>, with no collisions and no
                     illegal jumps.
                 </p>
                 <ul class="case-metrics">
                     <li><span>Valid</span><b>&#x2713;</b></li>
                     <li><span>Optimal</span><b>&#x2713;</b></li>
-                    <li><span>Cost (gt=3)</span><b>3</b></li>
+                    <li><span>Cost (gt&nbsp;=&nbsp;3)</span><b>3</b></li>
                 </ul>
             </div>
             <figure class="case-figure">
-                <!-- TODO: drop your trained GIF at docs/assets/train.gif -->
                 <img src="assets/train.gif"
-                     alt="Self-trained Qwen3-4B executing its plan on the same 3x3 MAPF case"
+                     alt="Trained Qwen3-4B executing its plan on the same 3x3 MAPF case"
                      loading="lazy" />
                 <figcaption>Trained model rollout (same sample).</figcaption>
             </figure>
@@ -195,63 +199,363 @@
 
 
 <!-- ============================================================
-     SECTION 3: Experimental Results
+     SECTION 3: Experimental Results — three main tables, stacked
      ============================================================ -->
 <section id="results" class="section section-light">
     <div class="container">
         <h2 class="section-heading">Experimental Results</h2>
         <p class="section-lead">
-            <!-- TODO: edit lead -->
-            Per-map-size valid&nbsp;% and optimal&nbsp;% on the held-out
-            benchmark, compared against uniform-curriculum and base-model
-            baselines.
+            Main results on the MAPF-FrozenLake benchmark across map sizes
+            3&times;3 to 10&times;10 and 3&ndash;5 agents. For each cell,
+            <em>acc.</em> = valid rate (%) and <em>opt.</em> = optimal rate
+            (%). Right-most <strong>Sum</strong> column reports the aggregate
+            over all sizes. Bold = best in column.
         </p>
 
-        <!-- A figure / chart row. Replace with your own PNGs in docs/assets/. -->
-        <div class="figure-grid">
-            <figure>
-                <!-- TODO: replace with your chart -->
-                <img src="assets/results_valid.png"
-                     alt="Valid rate per map size across methods"
-                     loading="lazy" />
-                <figcaption>Valid&nbsp;% by map size (3 agents).</figcaption>
-            </figure>
-            <figure>
-                <img src="assets/results_optimal.png"
-                     alt="Optimal rate per map size across methods"
-                     loading="lazy" />
-                <figcaption>Optimal&nbsp;% by map size (3 agents).</figcaption>
-            </figure>
-        </div>
-
-        <!-- Optional summary table. Edit numbers / methods inline. -->
-        <div class="table-wrap">
-            <table class="results-table">
+        <!-- 3-AGENT TABLE -->
+        <div class="result-table-wrap">
+            <table class="results-table results-table--wide">
+                <caption>
+                    <strong>3-agent</strong> evaluation set
+                    (map sizes 3&times;3 &ndash; 10&times;10).
+                </caption>
                 <thead>
                     <tr>
-                        <th>Method</th>
-                        <th>Valid&nbsp;%</th>
-                        <th>Optimal&nbsp;%</th>
-                        <th>Parse&nbsp;%</th>
+                        <th rowspan="2" class="th-model">Model</th>
+                        <th colspan="2">3&times;3</th>
+                        <th colspan="2">4&times;4</th>
+                        <th colspan="2">5&times;5</th>
+                        <th colspan="2">6&times;6</th>
+                        <th colspan="2">7&times;7</th>
+                        <th colspan="2">8&times;8</th>
+                        <th colspan="2">9&times;9</th>
+                        <th colspan="2">10&times;10</th>
+                        <th colspan="2" class="th-sum">Sum</th>
+                    </tr>
+                    <tr class="th-subrow">
+                        <th>acc.</th><th>opt.</th>
+                        <th>acc.</th><th>opt.</th>
+                        <th>acc.</th><th>opt.</th>
+                        <th>acc.</th><th>opt.</th>
+                        <th>acc.</th><th>opt.</th>
+                        <th>acc.</th><th>opt.</th>
+                        <th>acc.</th><th>opt.</th>
+                        <th>acc.</th><th>opt.</th>
+                        <th class="th-sum">acc.</th><th class="th-sum">opt.</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- TODO: replace rows with your actual numbers -->
+                    <!-- Proprietary baselines -->
                     <tr>
-                        <td>Base Qwen3-4B</td>
-                        <td>&mdash;</td><td>&mdash;</td><td>&mdash;</td>
+                        <td class="model">GPT-5.4</td>
+                        <td>64.67</td><td>41.33</td>
+                        <td>44.67</td><td>29.33</td>
+                        <td>42.67</td><td>31.33</td>
+                        <td>28.00</td><td>16.00</td>
+                        <td>20.67</td><td>12.67</td>
+                        <td>26.67</td><td>15.33</td>
+                        <td>20.00</td><td>11.31</td>
+                        <td>12.67</td><td>7.33</td>
+                        <td class="td-sum">32.50</td><td class="td-sum">20.58</td>
                     </tr>
                     <tr>
-                        <td>Uniform curriculum</td>
-                        <td>&mdash;</td><td>&mdash;</td><td>&mdash;</td>
+                        <td class="model">Grok-4.2</td>
+                        <td>36.00</td><td>25.33</td>
+                        <td>50.00</td><td>37.33</td>
+                        <td>29.33</td><td>18.67</td>
+                        <td>35.33</td><td>21.33</td>
+                        <td>29.33</td><td>12.00</td>
+                        <td>36.67</td><td>21.33</td>
+                        <td>36.00</td><td>22.00</td>
+                        <td>14.67</td><td>10.00</td>
+                        <td class="td-sum">33.42</td><td class="td-sum">21.00</td>
                     </tr>
-                    <tr class="highlight">
-                        <td><b>Self-evolved curriculum (ours)</b></td>
-                        <td>&mdash;</td><td>&mdash;</td><td>&mdash;</td>
+                    <tr>
+                        <td class="model">Gemini-3.1-Pro</td>
+                        <td>45.33</td><td>33.33</td>
+                        <td>32.67</td><td>23.33</td>
+                        <td>35.33</td><td>20.00</td>
+                        <td>24.00</td><td>12.00</td>
+                        <td>18.67</td><td>9.33</td>
+                        <td>20.00</td><td>10.67</td>
+                        <td>12.00</td><td>9.33</td>
+                        <td>8.00</td><td>4.67</td>
+                        <td class="td-sum">24.50</td><td class="td-sum">15.33</td>
+                    </tr>
+                    <tr class="row-group-end">
+                        <td class="model">Kimi-K2.5</td>
+                        <td>66.00</td><td>43.33</td>
+                        <td>59.33</td><td>34.67</td>
+                        <td>57.33</td><td>34.00</td>
+                        <td>47.33</td><td>34.67</td>
+                        <td>38.00</td><td>22.67</td>
+                        <td>41.33</td><td>24.00</td>
+                        <td>36.67</td><td>24.67</td>
+                        <td>23.33</td><td>16.00</td>
+                        <td class="td-sum">46.17</td><td class="td-sum">29.25</td>
+                    </tr>
+
+                    <!-- Qwen3-4B variants -->
+                    <tr>
+                        <td class="model">Qwen3-4B (base)</td>
+                        <td>40.00</td><td>38.00</td>
+                        <td>24.00</td><td>21.33</td>
+                        <td>18.00</td><td>16.67</td>
+                        <td>10.67</td><td>10.67</td>
+                        <td>8.00</td><td>8.00</td>
+                        <td>5.33</td><td>4.67</td>
+                        <td>10.00</td><td>10.00</td>
+                        <td>2.67</td><td>2.67</td>
+                        <td class="td-sum">14.83</td><td class="td-sum">14.00</td>
+                    </tr>
+                    <tr>
+                        <td class="model">Qwen3-4B + GRPO (random)</td>
+                        <td>54.67</td><td>41.33</td>
+                        <td>54.00</td><td>40.67</td>
+                        <td>50.67</td><td>29.33</td>
+                        <td>42.67</td><td>26.00</td>
+                        <td>38.67</td><td>21.33</td>
+                        <td>30.67</td><td>18.00</td>
+                        <td>32.67</td><td>18.67</td>
+                        <td>19.33</td><td>13.33</td>
+                        <td class="td-sum">40.42</td><td class="td-sum">26.08</td>
+                    </tr>
+                    <tr class="row-ours">
+                        <td class="model"><b>Qwen3-4B + GRPO + Ours</b></td>
+                        <td><b>68.67</b></td><td><b>48.00</b></td>
+                        <td><b>64.67</b></td><td><b>41.33</b></td>
+                        <td><b>62.67</b></td><td><b>35.33</b></td>
+                        <td><b>52.67</b></td><td><b>37.33</b></td>
+                        <td><b>46.00</b></td><td><b>26.00</b></td>
+                        <td><b>42.67</b></td><td><b>24.00</b></td>
+                        <td><b>44.00</b></td><td><b>25.33</b></td>
+                        <td><b>32.00</b></td><td><b>16.00</b></td>
+                        <td class="td-sum"><b>51.67</b></td>
+                        <td class="td-sum"><b>31.67</b></td>
                     </tr>
                 </tbody>
             </table>
         </div>
+
+        <!-- 4-AGENT TABLE -->
+        <div class="result-table-wrap">
+            <table class="results-table results-table--wide">
+                <caption>
+                    <strong>4-agent</strong> evaluation set
+                    (map sizes 4&times;4 &ndash; 10&times;10).
+                </caption>
+                <thead>
+                    <tr>
+                        <th rowspan="2" class="th-model">Model</th>
+                        <th colspan="2">4&times;4</th>
+                        <th colspan="2">5&times;5</th>
+                        <th colspan="2">6&times;6</th>
+                        <th colspan="2">7&times;7</th>
+                        <th colspan="2">8&times;8</th>
+                        <th colspan="2">9&times;9</th>
+                        <th colspan="2">10&times;10</th>
+                        <th colspan="2" class="th-sum">Sum</th>
+                    </tr>
+                    <tr class="th-subrow">
+                        <th>acc.</th><th>opt.</th>
+                        <th>acc.</th><th>opt.</th>
+                        <th>acc.</th><th>opt.</th>
+                        <th>acc.</th><th>opt.</th>
+                        <th>acc.</th><th>opt.</th>
+                        <th>acc.</th><th>opt.</th>
+                        <th>acc.</th><th>opt.</th>
+                        <th class="th-sum">acc.</th><th class="th-sum">opt.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="model">GPT-5.4</td>
+                        <td>35.33</td><td>22.00</td>
+                        <td>24.00</td><td>16.00</td>
+                        <td>16.00</td><td>10.00</td>
+                        <td>14.00</td><td>9.33</td>
+                        <td>16.67</td><td>10.67</td>
+                        <td>9.33</td><td>5.33</td>
+                        <td>4.00</td><td>2.67</td>
+                        <td class="td-sum">17.05</td><td class="td-sum">10.86</td>
+                    </tr>
+                    <tr>
+                        <td class="model">Grok-4.2</td>
+                        <td>48.00</td><td><b>34.00</b></td>
+                        <td>30.00</td><td>21.33</td>
+                        <td>32.00</td><td>18.00</td>
+                        <td>25.33</td><td>16.67</td>
+                        <td>5.33</td><td>3.33</td>
+                        <td>8.67</td><td>6.67</td>
+                        <td>14.67</td><td>7.33</td>
+                        <td class="td-sum">23.43</td><td class="td-sum">15.33</td>
+                    </tr>
+                    <tr>
+                        <td class="model">Gemini-3.1-Pro</td>
+                        <td>28.67</td><td>22.67</td>
+                        <td>16.67</td><td>14.67</td>
+                        <td>12.67</td><td>10.67</td>
+                        <td>16.67</td><td>12.67</td>
+                        <td>8.67</td><td>5.33</td>
+                        <td>4.67</td><td>2.00</td>
+                        <td>3.33</td><td>2.67</td>
+                        <td class="td-sum">12.95</td><td class="td-sum">10.10</td>
+                    </tr>
+                    <tr class="row-group-end">
+                        <td class="model">Kimi-K2.5</td>
+                        <td>44.67</td><td>28.67</td>
+                        <td>35.33</td><td>20.67</td>
+                        <td>28.67</td><td>16.67</td>
+                        <td>28.00</td><td>22.67</td>
+                        <td>22.00</td><td>16.67</td>
+                        <td>20.67</td><td>14.00</td>
+                        <td>9.33</td><td>6.00</td>
+                        <td class="td-sum">26.95</td><td class="td-sum">17.90</td>
+                    </tr>
+
+                    <tr>
+                        <td class="model">Qwen3-4B (base)</td>
+                        <td>10.67</td><td>9.33</td>
+                        <td>4.67</td><td>4.00</td>
+                        <td>2.67</td><td>2.67</td>
+                        <td>4.00</td><td>3.33</td>
+                        <td>2.00</td><td>2.00</td>
+                        <td>0.00</td><td>0.00</td>
+                        <td>0.00</td><td>0.00</td>
+                        <td class="td-sum">3.43</td><td class="td-sum">3.05</td>
+                    </tr>
+                    <tr>
+                        <td class="model">Qwen3-4B + GRPO (random)</td>
+                        <td>42.67</td><td>27.33</td>
+                        <td>33.33</td><td>23.33</td>
+                        <td>31.33</td><td>18.67</td>
+                        <td>26.67</td><td>15.33</td>
+                        <td>19.33</td><td>12.00</td>
+                        <td>19.33</td><td>10.67</td>
+                        <td>14.00</td><td>5.33</td>
+                        <td class="td-sum">26.67</td><td class="td-sum">16.10</td>
+                    </tr>
+                    <tr class="row-ours">
+                        <td class="model"><b>Qwen3-4B + GRPO + Ours</b></td>
+                        <td><b>49.33</b></td><td>32.00</td>
+                        <td><b>37.33</b></td><td><b>25.33</b></td>
+                        <td><b>36.67</b></td><td><b>22.00</b></td>
+                        <td><b>33.33</b></td><td><b>24.67</b></td>
+                        <td><b>31.33</b></td><td><b>20.67</b></td>
+                        <td><b>25.33</b></td><td><b>16.67</b></td>
+                        <td><b>18.67</b></td><td><b>8.00</b></td>
+                        <td class="td-sum"><b>33.14</b></td>
+                        <td class="td-sum"><b>21.33</b></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 5-AGENT TABLE -->
+        <div class="result-table-wrap">
+            <table class="results-table results-table--wide">
+                <caption>
+                    <strong>5-agent</strong> evaluation set
+                    (map sizes 5&times;5 &ndash; 10&times;10).
+                </caption>
+                <thead>
+                    <tr>
+                        <th rowspan="2" class="th-model">Model</th>
+                        <th colspan="2">5&times;5</th>
+                        <th colspan="2">6&times;6</th>
+                        <th colspan="2">7&times;7</th>
+                        <th colspan="2">8&times;8</th>
+                        <th colspan="2">9&times;9</th>
+                        <th colspan="2">10&times;10</th>
+                        <th colspan="2" class="th-sum">Sum</th>
+                    </tr>
+                    <tr class="th-subrow">
+                        <th>acc.</th><th>opt.</th>
+                        <th>acc.</th><th>opt.</th>
+                        <th>acc.</th><th>opt.</th>
+                        <th>acc.</th><th>opt.</th>
+                        <th>acc.</th><th>opt.</th>
+                        <th>acc.</th><th>opt.</th>
+                        <th class="th-sum">acc.</th><th class="th-sum">opt.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="model">GPT-5.4</td>
+                        <td>17.33</td><td>14.00</td>
+                        <td>10.00</td><td>6.00</td>
+                        <td>10.00</td><td>4.00</td>
+                        <td>6.00</td><td>4.67</td>
+                        <td>5.33</td><td>4.00</td>
+                        <td>6.00</td><td>3.33</td>
+                        <td class="td-sum">9.11</td><td class="td-sum">6.00</td>
+                    </tr>
+                    <tr>
+                        <td class="model">Grok-4.2</td>
+                        <td>26.67</td><td>16.00</td>
+                        <td>13.33</td><td>9.33</td>
+                        <td>16.67</td><td>10.67</td>
+                        <td>6.67</td><td>6.00</td>
+                        <td>7.33</td><td><b>5.33</b></td>
+                        <td>6.67</td><td>5.33</td>
+                        <td class="td-sum">12.89</td><td class="td-sum">8.78</td>
+                    </tr>
+                    <tr>
+                        <td class="model">Gemini-3.1-Pro</td>
+                        <td>9.33</td><td>8.00</td>
+                        <td>6.67</td><td>4.67</td>
+                        <td>5.33</td><td>4.00</td>
+                        <td>4.67</td><td>3.33</td>
+                        <td>2.00</td><td>1.33</td>
+                        <td>0.67</td><td>0.00</td>
+                        <td class="td-sum">4.78</td><td class="td-sum">3.56</td>
+                    </tr>
+                    <tr class="row-group-end">
+                        <td class="model">Kimi-K2.5</td>
+                        <td>23.33</td><td>17.33</td>
+                        <td>18.00</td><td>12.00</td>
+                        <td>16.00</td><td>7.33</td>
+                        <td>14.00</td><td>8.67</td>
+                        <td>8.00</td><td>4.67</td>
+                        <td>6.00</td><td>2.67</td>
+                        <td class="td-sum">13.47</td><td class="td-sum">8.78</td>
+                    </tr>
+
+                    <tr>
+                        <td class="model">Qwen3-4B (base)</td>
+                        <td>2.67</td><td>2.00</td>
+                        <td>2.67</td><td>2.67</td>
+                        <td>0.67</td><td>0.00</td>
+                        <td>2.00</td><td>2.00</td>
+                        <td>0.67</td><td>0.67</td>
+                        <td>0.00</td><td>0.00</td>
+                        <td class="td-sum">1.44</td><td class="td-sum">1.22</td>
+                    </tr>
+                    <tr>
+                        <td class="model">Qwen3-4B + GRPO (random)</td>
+                        <td>24.00</td><td>16.67</td>
+                        <td>21.33</td><td>14.00</td>
+                        <td>16.00</td><td>10.00</td>
+                        <td>13.33</td><td>8.00</td>
+                        <td>8.67</td><td>2.67</td>
+                        <td>7.33</td><td>3.33</td>
+                        <td class="td-sum">15.11</td><td class="td-sum">9.11</td>
+                    </tr>
+                    <tr class="row-ours">
+                        <td class="model"><b>Qwen3-4B + GRPO + Ours</b></td>
+                        <td><b>28.00</b></td><td><b>18.00</b></td>
+                        <td><b>26.00</b></td><td><b>17.33</b></td>
+                        <td><b>22.00</b></td><td><b>12.00</b></td>
+                        <td><b>18.00</b></td><td><b>10.67</b></td>
+                        <td><b>10.00</b></td><td>2.67</td>
+                        <td><b>8.00</b></td><td><b>5.33</b></td>
+                        <td class="td-sum"><b>18.67</b></td>
+                        <td class="td-sum"><b>11.00</b></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
     </div>
 </section>
 
@@ -260,9 +564,8 @@
 <footer class="footer">
     <div class="container">
         <p>
-            <!-- TODO: edit footer -->
-            &copy; <span id="year"></span> Project Authors.
-            Built with vanilla HTML/CSS on GitHub Pages.
+            &copy; <span id="year"></span> Chen, Li, Li, Liu, Guo &mdash;
+            LARK Lab @ HKUST(GZ) and University of Cambridge.
         </p>
     </div>
 </footer>
