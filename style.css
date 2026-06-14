@@ -265,34 +265,60 @@ code {
 
 /* ============================================================
    Results tables — wide multi-column main results
+
+   Each of the 3 tables sits in its own white card (.result-table-wrap).
+   The card is full-width within .container, so all 3 cards have the
+   IDENTICAL outer width and the IDENTICAL left edge — captions and
+   tables align across the three.
+
+   The table itself uses table-layout: fixed and a 220px Model column,
+   so the "Model" header on every table starts at the same X position.
+   Data columns split the remaining width equally within each table
+   (so 3-agent cells are narrower, 5-agent cells are wider — that's
+   expected: each table's right edge still lines up with the others).
    ============================================================ */
 .result-table-wrap {
-    /* Each table block gets its own row + horizontal scroll on narrow viewports. */
     background: #ffffff;
     border-radius: var(--radius);
     box-shadow: var(--shadow-sm);
-    padding: 16px 18px 18px;
+    padding: 18px 22px 20px;
     margin-bottom: 28px;
+    /* Horizontal scrollbar appears only when the *table* exceeds the wrap
+       (narrow phones). The wrap itself always fills the container, so the
+       outer cards line up perfectly. */
     overflow-x: auto;
 }
 .result-table-wrap:last-child { margin-bottom: 0; }
+
+/* Caption pulled OUT of <table>. Lives directly inside .result-table-wrap
+   so its X position is the wrap's padding edge — i.e. identical for all
+   three tables. */
+.result-table-title {
+    margin: 0 0 12px;
+    padding: 0 2px;
+    color: var(--fg-muted);
+    font-size: .95rem;
+    line-height: 1.5;
+}
+.result-table-title strong { color: var(--fg); }
 
 .results-table {
     border-collapse: collapse;
     border-spacing: 0;
     width: 100%;
-    min-width: 720px;       /* forces horizontal scroll on phones */
-    font-size: .92rem;
+    table-layout: fixed;       /* equal-share columns within each table */
+    font-size: .9rem;
     color: var(--fg);
 }
-.results-table caption {
-    caption-side: top;
-    text-align: left;
-    padding: 4px 4px 12px;
-    color: var(--fg-muted);
-    font-size: .95rem;
-}
-.results-table caption strong { color: var(--fg); }
+
+/* Per-table min-widths: same Model column (220px) + data-column floor
+   (~52px each). Different col counts → different min-widths, but all
+   three are well below the .container width, so on normal viewports
+   they render at the full card width with NO horizontal scroll and
+   look identically sized. */
+.results-table--w17 { min-width: 1104px; }  /* 3-agent: 17 data cols + Model */
+.results-table--w15 { min-width: 1000px; }  /* 4-agent: 15 data cols + Model */
+.results-table--w13 { min-width:  896px; }  /* 5-agent: 13 data cols + Model */
 
 .results-table th,
 .results-table td {
@@ -322,6 +348,8 @@ code {
     padding-left: 14px;
     background: var(--tbl-head-bg);
     border-right: 1px solid var(--tbl-border);
+    width: 220px;            /* identical across all 3 tables -> aligned */
+    min-width: 220px;
 }
 .results-table th.th-sum,
 .results-table td.td-sum {
