@@ -83,6 +83,35 @@
 <main>
 
 <!-- ============================================================
+     SECTION 0: Framework overview figure
+     ============================================================ -->
+<section id="framework" class="section">
+    <div class="container">
+        <figure class="framework-figure">
+            <a href="assets/framework.pdf" target="_blank" rel="noopener"
+               title="Open the high-resolution PDF in a new tab">
+                <img src="assets/framework.png"
+                     alt="Trainee-to-Trainer framework: the current RL policy
+                          analyses its own failures and proposes the next-stage
+                          environment configuration."
+                     loading="lazy" />
+            </a>
+            <figcaption>
+                <strong>Figure&nbsp;1.</strong> Overview of the
+                <em>LLM-as-Environment-Engineer</em> framework. At each stage,
+                the current RL policy is rolled out on the previous training
+                environment; its successes, failures, and behaviour summaries
+                are fed back to the same model, which then proposes the
+                configuration for the next-stage environment.
+                <a href="assets/framework.pdf" target="_blank"
+                   rel="noopener">[PDF]</a>
+            </figcaption>
+        </figure>
+    </div>
+</section>
+
+
+<!-- ============================================================
      SECTION 1: Abstract
      ============================================================ -->
 <section id="abstract" class="section section-light">
