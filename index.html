@@ -164,10 +164,27 @@
     <div class="container">
         <h2 class="section-heading">Case Study</h2>
         <p class="section-lead">
-            A 3&times;3 board with two agents. Both checkpoints receive the
-            same prompt; we visualise the executed plan token-by-token. The
-            base model emits an illegal/incomplete trajectory; the trained
-            policy recovers the optimal makespan-2 solution.
+            We probe the trained policy from two complementary angles:
+            <strong>(1)</strong> a small board where the <em>base</em> model
+            fails and the <em>trained</em> model recovers the optimal plan,
+            and <strong>(2)</strong> a much harder out-of-distribution board
+            that pushes every controllable axis &mdash; agent count, map size,
+            and obstacle density &mdash; to its maximum.
+        </p>
+    </div>
+
+    <!-- ============== CASE 1: small board, base vs trained ============== -->
+    <div class="container">
+        <h3 class="case-subheading">
+            Case&nbsp;1 &mdash; From failure to success on a 3&times;3 board
+            <span class="case-sub-tag">2 agents</span>
+        </h3>
+        <p class="case-sublead">
+            Both checkpoints receive the same prompt; we visualise the
+            executed plan token-by-token. The base model emits an
+            illegal/incomplete trajectory; the trained policy recovers the
+            optimal makespan-2 solution while spending
+            <strong>12&times; fewer tokens</strong>.
         </p>
     </div>
 
@@ -228,6 +245,60 @@
                      alt="Trained Qwen3-4B executing its plan on the same 3x3 MAPF case"
                      loading="lazy" />
                 <figcaption>Trained model rollout.</figcaption>
+            </figure>
+        </div>
+    </div>
+
+
+    <!-- ============== CASE 2: hard 10×10 / 5 agents / 50% holes ============== -->
+    <div class="container">
+        <h3 class="case-subheading">
+            Case&nbsp;2 &mdash; Generalising to a 10&times;10 maze
+            <span class="case-sub-tag">5 agents</span>
+            <span class="case-sub-tag">50% holes</span>
+        </h3>
+        <p class="case-sublead">
+            The model is <em>trained exclusively on 2-agent boards</em>, yet
+            it generalises to the hardest setting our benchmark generator can
+            produce: <strong>5&nbsp;agents</strong>, a
+            <strong>10&times;10</strong> grid, and
+            <strong>50%&nbsp;obstacle density</strong>. The trained policy
+            still returns a collision-free, makespan-optimal plan &mdash;
+            evidence that the LLM-engineered curriculum teaches transferable
+            MAPF skills rather than over-fitting to small boards.
+        </p>
+    </div>
+
+    <div class="case-block case-train">
+        <div class="container case-grid">
+            <div class="case-text">
+                <div class="case-tag tag-train">Out-of-distribution test</div>
+                <h3>Trainee-to-Trainer (ours)</h3>
+                <p>
+                    Five colour-coded agents must reach their matching
+                    destinations on a 10&times;10 board littered with holes.
+                    The trained policy plans every agent's full trajectory in
+                    a single rollout &mdash; respecting vertex-, edge- and
+                    obstacle-constraints &mdash; and lands on the optimal
+                    makespan for the ground-truth solution.
+                </p>
+                <p class="case-tokens">
+                    <strong>Tokens generated: 3,512</strong>
+                </p>
+                <ul class="case-metrics">
+                    <li><span>Agents</span><b>5</b></li>
+                    <li><span>Map</span><b>10&times;10</b></li>
+                    <li><span>Holes</span><b>50%</b></li>
+                    <li><span>Valid</span><b>&#x2713;</b></li>
+                    <li><span>Optimal</span><b>&#x2713;</b></li>
+                </ul>
+            </div>
+            <figure class="case-figure">
+                <img src="assets/big_train.gif"
+                     alt="Trained Qwen3-4B solving a hard 10x10 MAPF case
+                          with 5 agents and 50% obstacle density"
+                     loading="lazy" />
+                <figcaption>Trained model rollout on a 10&times;10 / 5-agent maze.</figcaption>
             </figure>
         </div>
     </div>

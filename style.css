@@ -226,6 +226,45 @@ code {
 .case-base  { background: var(--case-base-bg);  }
 .case-train { background: var(--case-train-bg); }
 
+/* Sub-headings that announce each sub-case INSIDE the Case Study section.
+   They sit in a normal .container (white background), between the global
+   <h2> and the next .case-block. */
+.case-subheading {
+    margin: 48px 0 .35rem;
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: var(--fg);
+    text-align: center;
+    line-height: 1.35;
+}
+/* First sub-heading (right after the section lead) sits closer. */
+.section .container > .case-subheading:first-child,
+.section > .container + .container > .case-subheading {
+    margin-top: 28px;
+}
+.case-sublead {
+    max-width: 760px;
+    margin: 0 auto 28px;
+    color: var(--fg-muted);
+    text-align: center;
+    line-height: 1.6;
+}
+.case-sublead strong { color: var(--fg); }
+
+/* Pill markers next to the sub-heading (e.g. "5 agents", "50% holes"). */
+.case-sub-tag {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 3px 10px;
+    font-size: .78rem;
+    font-weight: 600;
+    letter-spacing: .03em;
+    color: var(--fg-muted);
+    background: rgba(15, 23, 42, .06);
+    border-radius: 999px;
+    vertical-align: middle;
+}
+
 .case-grid {
     display: grid;
     grid-template-columns: minmax(280px, 1fr) minmax(280px, 1.15fr);
