@@ -196,8 +196,7 @@
                 <h3>Base Qwen3-4B</h3>
                 <p>
                     The base model parses the map and proposes an action for
-                    Agent&nbsp;0 but the trajectory for Agent&nbsp;1 is cut
-                    off before it reaches its goal, leaving an
+                    Agent&nbsp;0 but the trajectory for Agent&nbsp;1 is incomplete, leaving an
                     illegal/incomplete plan. The evaluator flags
                     <code>has_illegal_moves</code> = true and
                     <code>all_goals_reached</code> = false.
@@ -227,9 +226,10 @@
                 <h3>Trainee-to-Trainer (ours)</h3>
                 <p>
                     After three rounds of LLM-engineered curriculum, the same
-                    model finds the optimal plan in two timesteps:
-                    Agent&nbsp;0 moves <em>RIGHT</em>; Agent&nbsp;1 moves
-                    <em>UP</em> then <em>LEFT</em>, with no collisions and no
+                    model finds the optimal plan in three timesteps:
+                    Agent&nbsp;0 moves <em>LEFT</em>, <em>DOWN</em>, <em>LEFT</em>, 
+                    Agent&nbsp;1 moves
+                    <em>UP</em>, <em>LEFT</em>, <em>LEFT</em>, with no collisions and no
                     illegal jumps.
                 </p>
                 <p class="case-tokens">
